@@ -1,0 +1,80 @@
+import java.awt.Color;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.Period;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.AbstractAction;
+import java.io.FileWriter;
+
+public class Main implements ActionListener{
+
+	static TextField tf1=new TextField(); 
+	
+	public static void main(String[] args) {
+
+	    JFrame f=new JFrame("Age Calculator");   
+	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel=new JPanel();  
+        panel.setBounds(50,50,600,400);    
+        panel.setBackground(Color.gray);  
+	    JButton b1=new JButton( new AbstractAction("Print Date/Time") {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		LocalDate curDate = LocalDate.now(); 
+	    		tf1.setText(String.valueOf(curDate));
+			}
+	    });  
+	    JButton b2=new JButton( new AbstractAction("Save to file") {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		LocalDate curDate = LocalDate.now(); 
+	    		try {
+	    		FileWriter myWriter = new FileWriter("C:\\Users\\James\\Desktop\\log.txt");
+	    		myWriter.write(String.valueOf(curDate));
+			    myWriter.close();
+	    		} catch(Exception e1) {
+			    	System.out.print("Failed to write to file");
+			    }
+			}
+	    });  
+	    JButton b3=new JButton( new AbstractAction("Change background") {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		f.setBackground(Color.green);
+			}
+	    }); 
+	    JButton b4=new JButton( new AbstractAction("Exit") {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		f.dispose();
+			}
+	    }); 
+	    b1.setBounds(25,25,150,75);
+	    b1.setBackground(Color.gray); 
+	    b2.setBounds(200,25,150,75);
+	    b2.setBackground(Color.gray);
+	    b3.setBounds(375,25,150,75);
+	    b3.setBackground(Color.gray);
+	    b4.setBounds(550,25,150,75);
+	    b4.setBackground(Color.gray);
+	    tf1.setBounds(25,120, 150,25);  
+	    tf1.setText("");
+	    f.add(b1); f.add(tf1); f.add(b2); f.add(b3); f.add(b4);
+        
+        f.setSize(760,500);    
+        f.setLayout(null);    
+        f.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
